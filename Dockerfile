@@ -3,7 +3,7 @@ USER root
 RUN rm -Rf /app && \
 mkdir /app && \
 chmod -R 777 /app && \
-git clone -v "git://github.com/sirisurab/transpred.git" /app
+git clone -v "git://github.com/sirisurab/dupquest.git" /app
 # Set the working directory to /app
 WORKDIR /app
 RUN chmod -R 777 /app
