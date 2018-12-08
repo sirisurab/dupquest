@@ -14,6 +14,6 @@ services:
       replicas: 1
 
 networks:
-  backend::
+  backend:
     external:
       name: backend
