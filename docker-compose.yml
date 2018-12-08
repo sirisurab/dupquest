@@ -1,0 +1,19 @@
+version: '3.6'
+
+services:
+  notebook:
+    image: sirisurab/dq-app
+    env_file: .env
+    restart: on-failure
+    ports:
+      - '8888:8888'
+    networks:
+      - backend
+    deploy:
+      mode: replicated
+      replicas: 1
+
+networks:
+  backend::
+    external:
+      name: backend

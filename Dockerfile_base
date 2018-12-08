@@ -1,0 +1,29 @@
+# to be tagged as sirisurab/dq-base1
+
+# Use an official Python runtime as a parent image
+
+FROM jupyter/minimal-notebook AS base1
+USER root
+RUN mkdir app
+
+# to be tagged as sirisurab/dq-base2
+FROM base1 AS base2
+
+RUN apt-get update && \
+# for matplotlib
+apt-get -y install  libfreetype6-dev \
+                    pkg-config \
+# ssh only needed for the jupyter-notebook version
+                    ssh && \
+mkdir /minio && \
+wget -P /minio/ https://dl.minio.io/client/mc/release/linux-amd64/mc && \
+chmod -R +x /minio && \
+apt-get -y install libsnappy-dev
+
+# to be tagged as sirisurab/dq-base3
+FROM base2 AS base3
+USER jovyan
+COPY ./environment.yml /tmp/environment.yml
+RUN conda env update -n  base -f /tmp/environment.yml
+RUN ["/bin/bash","-c","source activate base"]
+ENV PYTHONPATH="/minio:${CONDA_DIR}/bin:${PYTHONPATH}"

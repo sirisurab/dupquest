@@ -1,0 +1,22 @@
+name: dupquest
+
+dependencies:
+  - pandas=0.23.0
+  - pip:
+    - fuzzywuzzy
+    - python-Levenshtein
+    - minio
+    - s3fs
+    - dask[complete]
+    - distributed
+    - fastparquet
+    - lz4
+    - bokeh
+    - wget
+    - chardet
+    - requests
+    - matplotlib
+    - seaborn
+    - statsmodels
+    - sklearn
+    - keras
