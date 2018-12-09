@@ -21,4 +21,5 @@ dependencies:
     - sklearn
     - keras
     - nltk
+    - msgpack<0.6.0
     - spacy
