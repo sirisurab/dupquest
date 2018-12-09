@@ -1,6 +1,7 @@
 FROM sirisurab/dq-base3 AS app
 USER root
-RUN rm -Rf /app && \
+RUN python -m spacy download en && \
+rm -Rf /app && \
 mkdir /app && \
 chmod -R 777 /app && \
 git clone -v "git://github.com/sirisurab/dupquest.git" /app
