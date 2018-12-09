@@ -1,6 +1,6 @@
 FROM sirisurab/dq-base3 AS app
 USER root
-RUN python -m spacy download en && \
+RUN python -m spacy download en_core_web_lg && \
 rm -Rf /app && \
 mkdir /app && \
 chmod -R 777 /app && \
