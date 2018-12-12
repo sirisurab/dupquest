@@ -9,16 +9,15 @@ RUN mkdir app
 # to be tagged as sirisurab/dq-base2
 FROM base1 AS base2
 
-RUN apt-get update && \
+#RUN apt-get update && \
 # for matplotlib
-apt-get -y install  libfreetype6-dev \
-                    pkg-config \
+#apt-get -y install  libfreetype6-dev \
+#                    pkg-config \
 # ssh only needed for the jupyter-notebook version
-                    ssh && \
-mkdir /minio && \
+#                    ssh && \
+RUN mkdir /minio && \
 wget -P /minio/ https://dl.minio.io/client/mc/release/linux-amd64/mc && \
-chmod -R +x /minio && \
-apt-get -y install libsnappy-dev
+chmod -R +x /minio
 
 # to be tagged as sirisurab/dq-base3
 FROM base2 AS base3
