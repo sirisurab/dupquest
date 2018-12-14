@@ -11,6 +11,6 @@ dependencies:
     - keras
     - nltk
     - msgpack<0.6.0
-    - spacy
+    - spacy<2.0.18
     - joblib
 #    - https://github.com/explosion/spacy-models/releases/download/en_core_web_lg-2.0.0/en_core_web_lg-2.0.0.tar.gz
