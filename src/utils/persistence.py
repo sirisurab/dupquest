@@ -175,7 +175,7 @@ def get_all_filenames(bucket: str, path: str='/') -> List[str]:
         path = '/' + path
     filenames: List[str] = s3.glob(bucket+path+'*')
     #return [file.rsplit('/', 1)[1] for file in filenames]
-    return [file for file in filenames]
+    return [file.split('/', 1)[1] for file in filenames]
 
 
 def remove_file(bucket: str, filename: str) -> bool:
