@@ -27,4 +27,4 @@ RUN conda env update -n  base -f /tmp/environment.yml
 RUN ["/bin/bash","-c","source activate base"]
 ENV PYTHONPATH="/minio:${CONDA_DIR}/bin:${PYTHONPATH}"
 
-RUN python -m spacy download en_core_web_md
+#RUN python -m spacy download en_core_web_md
