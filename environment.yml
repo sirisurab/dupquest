@@ -15,6 +15,9 @@ dependencies:
     - toolz
     - cython>=0.27.3
     - cvxopt>=1.2.0
+    - grakel-dev
+    - dask[complete]
+    - distributed
 #    - spacy<2.0.18
 #    - joblib
 #    - multiprocessing_on_dill
