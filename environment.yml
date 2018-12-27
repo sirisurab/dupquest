@@ -13,6 +13,9 @@ dependencies:
     - msgpack<0.6.0
     - gensim
     - toolz
+    - cython>=0.27.3
+    - cvxopt>=1.2.0
+    - grakel
 #    - spacy<2.0.18
 #    - joblib
 #    - multiprocessing_on_dill
