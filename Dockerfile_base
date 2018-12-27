@@ -17,7 +17,10 @@ FROM base1 AS base2
 #                    ssh && \
 RUN mkdir /minio && \
 wget -P /minio/ https://dl.minio.io/client/mc/release/linux-amd64/mc && \
-chmod -R +x /minio
+chmod -R +x /minio #&& \
+#mkdir /wiki.en && \
+#wget -P /wiki.en/ https://s3-us-west-1.amazonaws.com/fasttext-vectors/cc.en.300.bin.gz && \
+#chmod -R +x /wiki.en
 
 # to be tagged as sirisurab/dq-base3
 FROM base2 AS base3
@@ -28,5 +31,3 @@ RUN ["/bin/bash","-c","source activate base"]
 ENV PYTHONPATH="/minio:${CONDA_DIR}/bin:${PYTHONPATH}"
 
 #RUN python -m spacy download en_core_web_md
-RUN mkdir /wiki.en && \
-wget -P /wiki.en/ https://s3-us-west-1.amazonaws.com/fasttext-vectors/cc.en.300.bin.gz
