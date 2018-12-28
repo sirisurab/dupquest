@@ -18,6 +18,7 @@ dependencies:
     - grakel-dev
     - dask[complete]
     - distributed
+    - bokeh
 #    - spacy<2.0.18
 #    - joblib
 #    - multiprocessing_on_dill
