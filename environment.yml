@@ -2,16 +2,26 @@ name: dupquest
 channels:
   - conda-forge
 dependencies:
-  - pandas=0.23.0
-  - cyflann
+  - nose
+  - coverage
+  - gcc
+  - cython
+  - numpy
+  - scipy
+  - scikit-learn
+  - pyflann
+  - pyamg
+  - h5py
+  - plotly
   - megaman
   - pkg-config
+  - pandas=0.23.0
   - pip:
     - fuzzywuzzy
     - python-Levenshtein
     - minio
     - s3fs
-    - sklearn
+#    - sklearn
 #    - keras
     - nltk
     - msgpack<0.6.0
