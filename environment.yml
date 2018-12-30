@@ -3,6 +3,7 @@ channels:
   - conda-forge
 dependencies:
   - pandas=0.23.0
+  - cyflann
   - megaman
   - pkg-config
   - pip:
