@@ -7,10 +7,10 @@ import glob
 from functools import reduce
 from os import environ
 
-KEY: Optional[str] = environ.get('MINIO_ACCESS_KEY')
-SECRET: Optional[str] = environ.get('MINIO_SECRET_KEY')
-ENDPOINT: str = 'minio:9000'
-USE_SSL: bool = False
+KEY = environ.get('MINIO_ACCESS_KEY')
+SECRET = environ.get('MINIO_SECRET_KEY')
+ENDPOINT = 'minio:9000'
+USE_SSL = False
 
 def get_s3fs_client():
     return S3FileSystem(key=KEY, secret=SECRET, client_kwargs={'endpoint_url': 'http://'+ENDPOINT})
@@ -49,7 +49,7 @@ def copy_files(source_folder:str, dest_bucket:str) -> bool:
         raise err
 
     try:
-        filenames: List[str] = glob.glob(source_folder + '*')
+        filenames = glob.glob(source_folder + '*')
         print('all files in folder %(source)s are %(files)s' % {'source': source_folder, 'files': filenames})
         for file in filenames:
             mc.fput_object(bucket_name=dest_bucket,
@@ -162,18 +162,18 @@ def get_file_stream(bucket: str, filename: str) -> HTTPResponse:
 def get_all_filestreams(bucket: str) -> List[HTTPResponse]:
     #s3: S3FileSystem = get_s3fs_client()
     #filenames: List[str] = s3.glob(bucket+'/*')
-    filenames: List[str] = get_all_filenames(bucket, '/')
+    filenames = get_all_filenames(bucket, '/')
     print('all files in bucket %(bucket)s are %(files)s' % {'bucket': bucket, 'files': filenames})
     return [get_file_stream(bucket=bucket, filename=file) for file in filenames]
 
 
 def get_all_filenames(bucket: str, path: str='/') -> List[str]:
-    s3: S3FileSystem = get_s3fs_client()
+    s3 = get_s3fs_client()
     if not path.rsplit('/', 1)[1] == '':
         path = path + '/'
     if not path.split('/', 1)[0] == '':
         path = '/' + path
-    filenames: List[str] = s3.glob(bucket+path+'*')
+    filenames = s3.glob(bucket+path+'*')
     #return [file.rsplit('/', 1)[1] for file in filenames]
     return [file.split('/', 1)[1] for file in filenames]
 
@@ -190,7 +190,7 @@ def remove_file(bucket: str, filename: str) -> bool:
 def remove_all_files(bucket: str, path: str = '/') -> bool:
     #s3: S3FileSystem = get_s3fs_client()
     #filenames: List[str] = s3.glob(bucket+'/*')
-    filenames: List[str] = get_all_filenames(bucket, path)
+    filenames = get_all_filenames(bucket, path)
     print('all files in bucket %(bucket)s at path %(path)s are %(files)s' % {'bucket': bucket, 'path': path, 'files': filenames})
     return reduce(lambda rem_prev, rem_curr: rem_prev and rem_curr, [remove_file(bucket=bucket, filename=file) for file in filenames], True)
 

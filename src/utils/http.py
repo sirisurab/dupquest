@@ -10,7 +10,7 @@ pattern = re.compile('bytes (\d+)-(\d+)/(\d+)')
 
 def download_from_url(url: str, folder: str) -> str:
     try:
-        filename: str = url.split('/')[-1]
+        filename = url.split('/')[-1]
         ur.urlretrieve(url, folder+filename)
         print('downloaded file to '+folder+filename)
 
@@ -23,7 +23,7 @@ def download_from_url(url: str, folder: str) -> str:
 
 def get_stream_from_url(url: str) -> Tuple:
     try:
-        filename: str = url.split('/')[-1]
+        filename = url.split('/')[-1]
         #pool: PoolManager = PoolManager()
         #stream: HTTPResponse = pool.request('GET', url)
         request = ur.Request(url)
@@ -65,7 +65,7 @@ def download_chunk_from_url(url: str, folder: str, byte_range: str, filename: st
 def get_content_length(url) -> int:
     request = ur.Request(url)
     response = ur.urlopen(request)
-    content_range: str = response.headers['content-range']
+    content_range = response.headers['content-range']
     (start, end, length) = pattern.search(content_range).groups()
     return int(length)
 
