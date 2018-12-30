@@ -2,13 +2,14 @@ name: dupquest
 
 dependencies:
   - pandas=0.23.0
+  - megaman
   - pip:
     - fuzzywuzzy
     - python-Levenshtein
     - minio
     - s3fs
     - sklearn
-    - keras
+#    - keras
     - nltk
     - msgpack<0.6.0
     - gensim
