@@ -4,6 +4,7 @@ channels:
 dependencies:
   - pandas=0.23.0
   - megaman
+  - pkg-config
   - pip:
     - fuzzywuzzy
     - python-Levenshtein
