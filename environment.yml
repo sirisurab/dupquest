@@ -1,5 +1,6 @@
 name: dupquest
-
+channels:
+  - conda-forge
 dependencies:
   - pandas=0.23.0
   - megaman
@@ -14,9 +15,9 @@ dependencies:
     - msgpack<0.6.0
     - gensim
     - toolz
-    - cython>=0.27.3
-    - cvxopt>=1.2.0
-    - grakel-dev
+#    - cython>=0.27.3
+#    - cvxopt>=1.2.0
+#    - grakel-dev
     - dask[complete]
     - distributed
     - bokeh
