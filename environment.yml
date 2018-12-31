@@ -9,11 +9,11 @@ dependencies:
   - numpy
   - scipy
   - scikit-learn
-  - pyflann
+  - pyflann=1.8.5
   - pyamg
   - h5py
   - plotly
-  - megaman
+#  - megaman
   - pkg-config
   - pandas=0.23.0
   - pip:
