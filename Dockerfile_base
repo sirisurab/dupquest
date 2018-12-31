@@ -34,5 +34,6 @@ RUN ["/bin/bash","-c","source activate base"]
 ENV PYTHONPATH="/minio:${CONDA_DIR}/bin:${PYTHONPATH}"
 
 #RUN python -m spacy download en_core_web_md
+USER root
 RUN cd /megaman && \
 $CONDA_DIR/bin/python setup.py install
