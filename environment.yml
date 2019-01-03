@@ -2,18 +2,19 @@ name: dupquest
 channels:
   - conda-forge
 dependencies:
-  - nose
-  - coverage
-  - gcc
-  - cython
-  - numpy
-  - scipy
+#  - nose
+#  - coverage
+#  - gcc
+#  - cython
+#  - numpy
+#  - scipy
   - scikit-learn
-  - pyflann=1.8.5
-  - pyamg
-  - h5py
-  - plotly
+#  - pyflann=1.8.5
+#  - pyamg
+#  - h5py
+#  - plotly
 #  - megaman
+  - umap-learn
   - pkg-config
   - pandas=0.23.0
   - pip:
@@ -33,6 +34,7 @@ dependencies:
     - dask[complete]
     - distributed
     - bokeh
+    - matplotlib
 #    - spacy<2.0.18
 #    - joblib
 #    - multiprocessing_on_dill
