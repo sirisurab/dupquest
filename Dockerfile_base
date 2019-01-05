@@ -15,7 +15,8 @@ FROM base1 AS base2
 #                    pkg-config \
 # ssh only needed for the jupyter-notebook version
 #                    ssh && \
-RUN mkdir /minio && \
+RUN apt-get update && apt-get install -y r-base && \
+mkdir /minio && \
 wget -P /minio/ https://dl.minio.io/client/mc/release/linux-amd64/mc && \
 chmod -R +x /minio #&& \
 #mkdir /megaman && \
