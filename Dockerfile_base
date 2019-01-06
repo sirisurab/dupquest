@@ -15,13 +15,13 @@ FROM base1 AS base2
 #                    pkg-config \
 # ssh only needed for the jupyter-notebook version
 #                    ssh && \
-RUN apt-get update && apt-get install -y r-base && \
-mkdir /minio && \
+#RUN apt-get update && apt-get install -y r-base && \
+RUN mkdir /minio && \
 wget -P /minio/ https://dl.minio.io/client/mc/release/linux-amd64/mc && \
-chmod -R +x /minio #&& \
-#mkdir /megaman && \
-#git clone -v "git://github.com/mmp2/megaman.git" /megaman && \
-#chmod -R +x /megaman
+chmod -R +x /minio && \
+mkdir /trajdist && \
+git clone -v "git://github.com/bguillouet/traj-dist.git" /trajdist && \
+chmod -R +x /trajdist
 #mkdir /wiki.en && \
 #wget -P /wiki.en/ https://s3-us-west-1.amazonaws.com/fasttext-vectors/cc.en.300.bin.gz && \
 #chmod -R +x /wiki.en
@@ -35,6 +35,7 @@ RUN ["/bin/bash","-c","source activate base"]
 ENV PYTHONPATH="/minio:${CONDA_DIR}/bin:${PYTHONPATH}"
 
 #RUN python -m spacy download en_core_web_md
-#USER root
-#RUN cd /megaman && \
-#$CONDA_DIR/bin/python setup.py install
+USER root
+RUN cd /trajdist && \
+$CONDA_DIR/bin/python setup.py install && \
+pip install .
