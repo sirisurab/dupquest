@@ -27,3 +27,4 @@ dependencies:
     - similaritymeasures
     - Shapely>=1.6.4
     - Geohash==1.0
+ #   - python-pcl
