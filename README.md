@@ -11,13 +11,12 @@ Source : Kaggle (Quora Question Pairs)
 Description : The dataset contains a human-labeled training set and a test set. Each record in the training set represents a pair of questions with the text of both questions and a binary label which indicates whether the question-pair represents a duplicate or not.
 
 ## Preprocessing
-The dataset was processed by the ipython file src/tfidf_word2vec.ipynb
+The dataset was processed by [this ipython file](src/tfidf_word2vec.ipynb)
 
 ## Modeling
 
-### Logistic Regression and XGBoost
-src/tfidf_word2vec.ipynb
+### [Logistic Regression and XGBoost](src/tfidf_word2vec.ipynb)
 
 ### Deep Learning Methods
-src/DL_encode_attend.ipynb
-src/DL_LSTMN.ipynb (experimental)
+  [Attention based methods](src/DL_encode_attend.ipynb)
+  [LSTMN (experimental)](src/DL_LSTMN.ipynb)
