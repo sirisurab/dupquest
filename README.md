@@ -1,5 +1,6 @@
 # dupquest
-IDENTIFYING DUPLICATE QUESTIONS
+## IDENTIFYING DUPLICATE QUESTIONS
+<p>(for a more detailed description refer to the <a href='Capstone 2 - Milestone Report.pdf'>project milestone report</a>)</p>
 
 ## Problem
 <p>Question-answering and knowledge-sharing platforms like Quora and Stack-Exchange require mechanisms to group questions in their database based on similar intent. According to Quora about 100 million users visit their website every month, and a lot of the questions end up being duplicates (duplicate questions could be differently worded but they have the same intent)
