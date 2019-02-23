@@ -1,0 +1,88 @@
+# common functions to initialize keras session, load data and plot optimization history
+
+
+from sklearn.metrics import roc_curve, auc
+import pandas as pd
+import numpy as np
+import pickle
+import matplotlib.pyplot as plt
+import seaborn as sns
+from matplotlib.ticker import ScalarFormatter
+sns.set_context('paper')
+sns.set_style('darkgrid')
+
+import tensorflow as tf
+from keras.backend.tensorflow_backend import set_session
+
+def init_session():    
+    config = tf.ConfigProto()
+    config.gpu_options.allow_growth = True  # dynamically grow the memory used on the GPU
+    config.log_device_placement = True  # to log device placement (on which device the operation ran)
+                                        # (nothing gets printed in Jupyter, only if you run it standalone)
+    sess = tf.Session(config=config)
+    set_session(sess)  # set this TensorFlow session as the default session for Keras
+    
+def data():
+    data_folder = '/media/siri/78C6823EC681FD1E/minio/data/dq-data/dl/'
+    input_folder = '/media/siri/78C6823EC681FD1E/minio/data/dq-data/'
+    q1_train_w2v = pickle.load(open(data_folder+'q1_train_w2v.p', 'rb'))
+    q2_train_w2v = pickle.load(open(data_folder+'q2_train_w2v.p', 'rb'))
+    q1_test_w2v = pickle.load(open(data_folder+'q1_test_w2v.p', 'rb'))
+    q2_test_w2v = pickle.load(open(data_folder+'q2_test_w2v.p', 'rb'))
+    x_train = np.concatenate([np.expand_dims(q1_train_w2v, axis=1),np.expand_dims(q2_train_w2v, axis=1)], axis=1)
+    x_test = np.concatenate([np.expand_dims(q1_test_w2v, axis=1),np.expand_dims(q2_test_w2v, axis=1)], axis=1)
+    y_train = pickle.load(open(input_folder+'y_train.p', 'rb'))
+    y_test = pickle.load(open(input_folder+'y_test.p', 'rb'))
+    return x_train, y_train, x_test, y_test
+    
+def plot_optimization_history(trials):    
+    x = range(1, len(trials.results)+1)
+    y1 = [eval_run['train_acc'] for eval_run in trials.results]
+    y2 = [-eval_run['loss'] for eval_run in trials.results]
+    df1 = pd.DataFrame(np.array(x), columns=['evaluation run'])
+    df1['accuracy'] = pd.Series(np.array(y1))
+    df1['run'] = 'training'
+    df2 = pd.DataFrame(np.array(x), columns=['evaluation run'])
+    df2['accuracy'] = pd.Series(np.array(y2))
+    df2['run'] = 'validation'
+    df = pd.concat([df1, df2])
+    pal = {'validation':'#3498db', 'training':'#e74c3c'}
+    ax = sns.relplot('evaluation run','accuracy', hue='run', style='run', data=df, 
+                linewidth=2.0, palette=pal, kind="line", legend='full', height=5, aspect=7/5)
+    ax.set(xlim=(0, len(trials.results)+.5), ylim=(-.05, 1.0), title='history of optimization')
+    
+def plot_roc(fpr, tpr, roc_auc):
+    df_real = pd.DataFrame(fpr, columns=['false positive rate'])
+    df_real['true positive rate'] = pd.Series(tpr)
+    df_real['curve'] = 'model'
+    fpr_ideal = np.insert(fpr, 1, 0.00001)
+    df_ideal = pd.DataFrame(fpr_ideal, columns=['false positive rate'])
+    df_ideal['true positive rate'] = 1.0
+    df_ideal['true positive rate'][0] = 0.0
+    df_ideal['curve'] = 'ideal'
+    df_worst = pd.DataFrame(fpr, columns=['false positive rate'])
+    df_worst['true positive rate'] = pd.Series(fpr)
+    df_worst['curve'] = 'random guess'
+    df = pd.concat([df_real, df_ideal, df_worst])
+    pal = {'model': "#3498db", 'random guess':"#e74c3c", 'ideal':"#34495e"}
+    ax = sns.relplot('false positive rate', 'true positive rate', hue='curve', data=df,
+                linewidth=2.0, palette=pal, kind="line", legend='full', height=5, aspect=7/5)
+    ax.set(xlim=(-.05, 1.0), ylim=(0.0, 1.05), title='Receiver operating characteristic\n(area under curve = %0.2f)' % roc_auc)
+    
+def bar_plot_maker(data, value_col, name_col, label, title, logscale=False, xticks=None, xticklabels=None):
+    f, ax = plt.subplots(figsize=(7, 10))
+    # Plot variances
+    sns.set_color_codes("pastel")
+    sns.barplot(x=value_col, y=name_col, data=data,
+                label=label, color="b")
+
+    # Add a legend and informative axis label
+    ax.legend(ncol=1, loc="lower right", frameon=True)
+    ax.set(ylabel="", title=title)
+    if logscale:
+        ax.set(xscale='log')
+    if xticks:
+        ax.set(xticks=xticks, xticklabels=xticklabels)
+    if logscale:
+        ax.get_xaxis().set_major_formatter(ScalarFormatter())
+    sns.despine(left=True, bottom=True)
