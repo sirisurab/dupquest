@@ -12,7 +12,7 @@ Source : Kaggle (Quora Question Pairs)<br>
 Description : The dataset contains a human-labeled training set and a test set. Each record in the training set represents a pair of questions with the text of both questions and a binary label which indicates whether the question-pair represents a duplicate or not.
 
 ## Data Processing
-The dataset was processed by [this ipython file](src/tfidf_word2vec.ipynb)
+The dataset was processed by [this ipython file](notebooks/logR_GBM.ipynb)
 
 ### Preprocessing
 <p>Following preprocessing was performed on the text data using the <a href='https://radimrehurek.com/gensim/parsing/preprocessing.html'>gensim API</a>:
@@ -35,12 +35,12 @@ The text data was embedded in 300 dimensional space using two methods:
 
 ### Machine Learning Methods
 <ul>
-  <li><a href='src/tfidf_word2vec.ipynb'>Logistic Regression</a></li>
-  <li><a href='src/tfidf_word2vec.ipynb'>XGBoost</a></li>
+  <li><a href='notebooks/logR_GBM.ipynb'>Logistic Regression</a></li>
+  <li><a href='notebooks/logR_GBM.ipynb'>XGBoost</a></li>
 </ul>
 
 ### Deep Learning Methods
 <ul>
-  <li><a href='src/DL_encode_attend.ipynb'>Attention based methods</a></li>
-  <li><a href='src/DL_LSTMN.ipynb'>LSTMN (experimental and WIP)</a></li>
+  <li><a href='notebooks/deepLearning.ipynb'>Attention based methods</a></li>
+  <li><a href='notebooks/deepLearning.ipynb'>LSTMN (experimental and WIP)</a></li>
 </ul>
